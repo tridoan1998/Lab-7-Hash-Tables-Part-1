@@ -58,7 +58,65 @@ void Book::set_price(double p) {
 /**Additional Functions*/
 
 
-bool Book::operator==(const Book& book) {
+friend ostream& operator<<(ostream& os, const Book& book)
+{
+	os << book.title << " by " << book.author << endl;
+	os << "$" << book.price << endl;
+	os << "ISBN#:" << book.isbn << endl;
+	return os;
+}
+//prints out a book to the designated stream in the following format
+
+bool Book::operator==(const Book& book)
+{
     return (title == book.title && author==book.author);
 }
-//To-do: Add <, > and << here
+//compares two books to determine if they are the same book
+
+
+bool Book::operator<(const Book& book)
+{
+	if(this->title.compare(book.title) == 0 && this->author.compare(book.author) == 0 && this->price == (book.price) && this->isbn == book.isbn )
+		return false;
+	else
+	{
+		if(this->title.compare(book.title) < 0)
+			return true;
+		else if(this->title.compare(book.title) > 0)
+			return false;
+		else
+			if(this->author.compare(book.author) < 0)
+				return true;
+			else
+				return false;
+	}
+}
+//compares two books to determine if one comes before the other
+//alphabetically by title and secondarily by author if the two
+//books contain the same title
+//returns false if the two books are the same
+
+
+bool Book::operator>(const Book& book)
+{
+	if(this->title.compare(book.title) == 0 && this->author.compare(book.author) == 0 && this->price == book.price && this->isbn == book.isbn)
+		return false;
+	else 			// 3 cases, < , >, and =
+	{
+		if(this->title.compare(book.title) > 0)	// title is >
+			return true;
+		else if(this->title.compare(book.title) < 0)// title is <
+			return false;
+		else	// title is = then (check for author(2 cases))
+			{
+				if(this->author.compare(book.author) > 0)
+					return true;
+				else
+					return false;
+			}
+	}
+}
+//compares two books to determine if one comes after the other
+//alphabetically by title and secondarily by author if the two
+//books contain the same title
+//returns false if the two books are the same

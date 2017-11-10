@@ -50,7 +50,7 @@ public:
     //note2: do not print out the <> as part of the output
 
     bool operator==(const Book& book);
-    //compares two books to determine if they are the same book
+	//compares two books to determine if they are the same book
 
     bool operator<(const Book& book);
     //compares two books to determine if one comes before the other
